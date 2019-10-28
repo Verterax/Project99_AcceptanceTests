@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace Project99_AcceptanceTests.POMs
 {
-    class POMPage
+    public class POMPage
     {
         private readonly IWebDriver _driver;
         public IWebDriver Driver { get { return _driver; } }

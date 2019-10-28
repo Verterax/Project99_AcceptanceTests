@@ -5,9 +5,10 @@ using OpenQA.Selenium;
 
 namespace Project99_AcceptanceTests.POMs
 {
-    class FiveKRegistration : POMPage
+    public class FiveKRegistration : POMPage
     {
-        public FiveKRegistration(IWebDriver driver) : base(driver) { }
+        public FiveKRegistration(IWebDriver driver) : 
+            base(driver, "https://www.project99.org/5kregistration/test-5k-lights-for-life-registration-bk779") { }
 
         #region Page Objects
 

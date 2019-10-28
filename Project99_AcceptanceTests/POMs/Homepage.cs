@@ -8,7 +8,7 @@ using Project99_AcceptanceTests.SeleniumFramework;
 
 namespace Project99_AcceptanceTests.POMs
 {
-    class Homepage : POMPage
+    public class Homepage : POMPage
     {
         public Homepage(IWebDriver driver) : base(driver, "https://www.project99.org/") 
         {

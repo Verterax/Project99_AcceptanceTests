@@ -11,13 +11,18 @@ namespace Project99_AcceptanceTests
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
+            IWebDriver driver = WebDrivers.Current;
 
-            
+            Homepage pageHome = new Homepage(driver);
+            //Assert.AreEqual(pageHome.BaseURL, driver.Url);
 
-            //WebDrivers.CleanUp();
-            //return;
+            LightsForLife pageLights = pageHome.ClickLightsForLifeLink();
+            //Assert.AreEqual(pageLights.BaseURL, driver.Url);
+
+            FiveKRegistration page5K = pageLights.Click5KLink();
+            //Assert.AreEqual(page5K.BaseURL, driver.Url);
         }
    
     }

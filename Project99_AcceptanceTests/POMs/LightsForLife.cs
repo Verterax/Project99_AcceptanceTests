@@ -6,7 +6,7 @@ using Project99_AcceptanceTests.SeleniumFramework;
 
 namespace Project99_AcceptanceTests.POMs
 {
-    class LightsForLife : POMPage
+    public class LightsForLife : POMPage
     {
         public LightsForLife(IWebDriver driver) : base(driver, "https://www.project99.org/lightsforlife") { }
 

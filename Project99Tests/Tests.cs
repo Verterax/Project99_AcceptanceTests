@@ -1,29 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+
 using OpenQA.Selenium;
-using Project99_AcceptanceTests.POMs;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support;
+using NUnit.Framework;
+using Project99_AcceptanceTests;
 using Project99_AcceptanceTests.SeleniumFramework;
+using Project99_AcceptanceTests.POMs;
 
-namespace Project99_AcceptanceTests.Tests
+
+namespace Project99Tests
 {
-    [TestFixture]
-    class MainTests
+    public class Tests
     {
-
-        [SetUp]
-        public void SetUp()
-        {
-
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-
-        }
-
         [Test]
         public void Can_Navigate_To_5K_Signup_Page_From_Homepage()
         {
@@ -62,11 +53,5 @@ namespace Project99_AcceptanceTests.Tests
         {
             throw new NotImplementedException();
         }
-
-
-
-
-
-
     }
 }
