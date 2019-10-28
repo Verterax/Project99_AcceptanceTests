@@ -33,7 +33,13 @@ namespace Project99Tests
         [Test]
         public void Can_See_And_Click_Shopping_Cart_Button()
         {
-            throw new NotImplementedException();
+            IWebDriver driver = WebDrivers.Current;
+
+            FiveKRegistration page5K = new FiveKRegistration(driver);
+            page5K.NavigateToBaseURL();
+
+            IWebElement cartLink = page5K.linkViewCart;
+            Assert.IsTrue(cartLink.IsInteractive());
         }
 
         [Test]

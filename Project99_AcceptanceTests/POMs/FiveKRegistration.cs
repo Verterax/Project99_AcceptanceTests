@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
+using Project99_AcceptanceTests.SeleniumFramework;
 
 namespace Project99_AcceptanceTests.POMs
 {
+
+
     public class FiveKRegistration : POMPage
     {
         public FiveKRegistration(IWebDriver driver) : 
@@ -24,6 +27,11 @@ namespace Project99_AcceptanceTests.POMs
         #endregion
 
         #region Interaction
+
+        public void SelectRegistrationType(RegistrationTypes registrationType)
+        {
+            selectRegistrationType.SelectDropdownItem((int)registrationType);
+        }
 
         #endregion
     }

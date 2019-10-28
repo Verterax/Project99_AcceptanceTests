@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
+using System.Threading;
 using Project99_AcceptanceTests.POMs;
 using Project99_AcceptanceTests.SeleniumFramework;
 
@@ -12,16 +13,17 @@ namespace Project99_AcceptanceTests
     class Program
     {
         static void Main()
-        {
+        {           
             IWebDriver driver = WebDrivers.Current;
 
-            Homepage pageHome = new Homepage(driver);
-            //Assert.AreEqual(pageHome.BaseURL, driver.Url);
+            FiveKRegistration page5K = new FiveKRegistration(driver);
+            page5K.NavigateToBaseURL();
 
-            LightsForLife pageLights = pageHome.ClickLightsForLifeLink();
-            //Assert.AreEqual(pageLights.BaseURL, driver.Url);
+            page5K.SelectRegistrationType(RegistrationTypes.Adult);
 
-            FiveKRegistration page5K = pageLights.Click5KLink();
+            //Assert.IsTrue(page5K.linkViewCart.IsInteractive);
+
+
             //Assert.AreEqual(page5K.BaseURL, driver.Url);
         }
    

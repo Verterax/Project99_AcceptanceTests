@@ -8,6 +8,11 @@ namespace Project99_AcceptanceTests.SeleniumFramework
 {
     public static class SHelpers
     {
+        public static bool IsInteractive(this IWebElement element)
+        {
+            return element.Displayed && element.Enabled;
+        }
+
         public static void ScrollToElement(this IWebElement element, IWebDriver driver)
         {
             IJavaScriptExecutor je = ((IJavaScriptExecutor)driver);

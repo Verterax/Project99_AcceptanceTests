@@ -28,6 +28,11 @@ namespace Project99_AcceptanceTests.SeleniumFramework
             new SelectElement(WebDrivers.Current.FindElement(by)).SelectByText(value);
         }
 
+        public static void SelectDropdownItem(this IWebElement element, int index)
+        {
+            new SelectElement(element).SelectByIndex(index);
+        }
+
 
 
     }
