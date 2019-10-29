@@ -18,14 +18,10 @@ namespace Project99_AcceptanceTests
             //Age_Is_Correct_Given_DOB()
             IWebDriver driver = WebDrivers.Current;
 
-
             FiveKRegistrationForm form5K = new FiveKRegistrationForm(driver, RegistrationTypes.Student);
-
             RegistrationData data = new RegistrationData(true);
 
             form5K.FillWithData(data);
-
-            //Assert.AreEqual(page5K.BaseURL, driver.Url);
         }
    
     }

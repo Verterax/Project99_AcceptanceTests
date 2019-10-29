@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using OpenQA.Selenium;
 using System.Threading;
+using Project99_AcceptanceTests.SeleniumFramework;
 
 namespace Project99_AcceptanceTests.POMs
 {
@@ -22,7 +24,7 @@ namespace Project99_AcceptanceTests.POMs
         {
             this.NavigateToBaseURL();
             this.SelectRegistrationType(registrationType);
-            Thread.Sleep(1000);
+            Thread.Sleep(1000); // Wait for form to render.
         }
 
         #endregion
@@ -131,7 +133,84 @@ namespace Project99_AcceptanceTests.POMs
 
         public void FillWithData(RegistrationData data)
         {
-            throw new NotImplementedException();
+            this.txtFirstName.SendKeys(data.FirstName);
+            this.txtLastName.SendKeys(data.LastName);
+
+            if (data.IAmAStudent)
+                this.chkIAmStudent.Click();
+            if (data.IAmNotAStudent)
+                this.chkIAmNotAStudent.Click();
+
+            this.txtSchoolNameAndGrade.SendKeys(data.SchoolNameAndGrade);
+
+            this.txtAddress1.SendKeys(data.Address1);
+            this.txtAddress2.SendKeys(data.Address2);
+            this.txtCity.SendKeys(data.City);
+            this.txtState.SendKeys(data.State);
+            this.txtZip.SendKeys(data.Zip);
+            this.txtCountry.SendKeys(data.Country);
+
+            this.txtPhonePt1.ScrollToElement(Driver);
+
+            this.SetTriplet(data.Phone, txtPhonePt1, txtPhonePt2, txtPhonePt3);
+
+            this.txtEmail.SendKeys(data.Email);
+
+            this.SetTriplet(data.DOB, txtDOBPt1, txtDOBPt2, txtDOBPt3);
+
+            this.selectSex.SelectDropdownItem((int)data.Sex);
+
+            this.selectTShirtSize.SelectDropdownItem((int)data.TShirtSize);
+
+            if (data.FirstResponder)
+                this.chkFirstResponder.Click();
+
+            this.txtEmergencyFirstName.SendKeys(data.EmergencyFirstName);
+            this.txtEmergencyLastName.SendKeys(data.EmergencyLastName);
+
+            this.txtEmergencyPhonePt1.ScrollToElement(Driver);
+
+            this.SetTriplet(data.EmergencyPhoneNumber, txtEmergencyPhonePt1, txtEmergencyPhonePt2, txtEmergencyPhonePt3);
+
+            this.selectDonateExtra.SelectDropdownItem((int)data.DonateExtra);
+
+            if (data.AcceptTerms)
+                this.chkAcceptTerms.Click();
+        }
+
+        /// <summary>
+        /// Helper Method for setting controls like Dates and Phone numbers on SquareSpace forms.
+        /// </summary>
+        /// <param name="s">The string to split. Strings must use a single delimiting char such as a '-'
+        /// <param name="c1">The first control.</param>
+        /// <param name="c2">The second control.</param>
+        /// <param name="c3">The third control.</param>
+        private void SetTriplet(string s, IWebElement c1, IWebElement c2, IWebElement c3)
+        {
+            char delimiter = s.Where(c => !char.IsDigit(c)).FirstOrDefault();
+            string[] sections = s.Split(delimiter);
+
+            if (sections.Length != 3)
+                throw new Exception(string.Format("The value {0} is not a valid triplet format.", s));
+
+            c1.SendKeys(sections[0]);
+            c2.SendKeys(sections[1]);
+            c3.SendKeys(sections[2]);
+        }
+
+        /// <summary>
+        /// Gets a single string value from a trio of controls comprising a date or phone number.
+        /// </summary>
+        /// <param name="c1">The first control.</param>
+        /// <param name="c2">The second control.</param>
+        /// <param name="c3">The third control.</param>
+        /// <returns>Returns the strings as a single value delimited with two '-' characters. </returns>
+        private string GetTriplet(IWebElement c1, IWebElement c2, IWebElement c3)
+        {
+            return string.Format("{0}-{1}-{2}",
+                c1.GetAttribute("value"),
+                c2.GetAttribute("value"),
+                c3.GetAttribute("value"));
         }
 
         #endregion
