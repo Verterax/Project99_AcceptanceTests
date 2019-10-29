@@ -22,15 +22,31 @@ namespace Project99_AcceptanceTests.POMs
             By.CssSelector("#productDetails > div.product-variants > div > div.variant-select-wrapper > select"));
 
         public IWebElement linkAddToCart => Driver.FindElement(
-            By.CssSelector("#yui_3_17_2_1_1572222377354_179"));
+            By.XPath("/html/body/div[3]/main/div/div/div[2]/div[2]/div[4]/div"));
 
         #endregion
 
         #region Interaction
 
-        public void SelectRegistrationType(RegistrationTypes registrationType)
+        /// <summary>
+        /// Select the registration type, and get the affiliated registration form.
+        /// </summary>
+        /// <param name="registrationType"></param>
+        /// <returns>Returns 5KRegistration Form unless RegistrationType is "None"</returns>
+        public FiveKRegistrationForm SelectRegistrationType(RegistrationTypes registrationType)
         {
             selectRegistrationType.SelectDropdownItem((int)registrationType);
+
+            if (registrationType != RegistrationTypes.None)
+            {
+                linkAddToCart.ScrollToElement(Driver);
+                linkAddToCart.Click();
+
+                return new FiveKRegistrationForm(Driver);
+            }
+            else
+                return null;
+            
         }
 
         #endregion

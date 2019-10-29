@@ -13,15 +13,15 @@ namespace Project99_AcceptanceTests
     class Program
     {
         static void Main()
-        {           
+        {
+
+            //Age_Is_Correct_Given_DOB()
             IWebDriver driver = WebDrivers.Current;
 
-            FiveKRegistration page5K = new FiveKRegistration(driver);
-            page5K.NavigateToBaseURL();
 
-            page5K.SelectRegistrationType(RegistrationTypes.Adult);
+            FiveKRegistrationForm form5K = new FiveKRegistrationForm(driver, RegistrationTypes.Student);
 
-            //Assert.IsTrue(page5K.linkViewCart.IsInteractive);
+
 
 
             //Assert.AreEqual(page5K.BaseURL, driver.Url);
