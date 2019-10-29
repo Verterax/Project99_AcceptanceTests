@@ -24,6 +24,7 @@ namespace Project99_AcceptanceTests.POMs
             this.SelectRegistrationType(registrationType);
             Thread.Sleep(1000);
         }
+
         #endregion
 
         #region Page Objects
@@ -127,6 +128,11 @@ namespace Project99_AcceptanceTests.POMs
         #endregion
 
         #region Page Interactions
+
+        public void FillWithData(RegistrationData data)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
