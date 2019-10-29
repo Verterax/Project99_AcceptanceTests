@@ -27,6 +27,7 @@ namespace Project99_AcceptanceTests.POMs
     public enum TShirtOptions
     {
         None,
+        NA_Basic_Registration,
         YM_Youth_Medium,
         YL_Youth_Large,
         S_Small,
