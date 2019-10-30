@@ -24,7 +24,7 @@ namespace Project99_AcceptanceTests.POMs
         {
             this.NavigateToBaseURL();
             this.SelectRegistrationType(registrationType);
-            Thread.Sleep(1000); // Wait for form to render.
+            Thread.Sleep(3500); // Wait for form to render.
         }
 
         #endregion
@@ -152,11 +152,11 @@ namespace Project99_AcceptanceTests.POMs
 
             this.txtPhonePt1.ScrollToElement(Driver);
 
-            this.SetTriplet(data.Phone, txtPhonePt1, txtPhonePt2, txtPhonePt3);
+            SetTriplet(data.Phone, txtPhonePt1, txtPhonePt2, txtPhonePt3);
 
             this.txtEmail.SendKeys(data.Email);
 
-            this.SetTriplet(data.DOB, txtDOBPt1, txtDOBPt2, txtDOBPt3);
+            this.SetDOB(data.DOB);
 
             this.selectSex.SelectDropdownItem((int)data.Sex);
 
@@ -170,7 +170,7 @@ namespace Project99_AcceptanceTests.POMs
 
             this.txtEmergencyPhonePt1.ScrollToElement(Driver);
 
-            this.SetTriplet(data.EmergencyPhoneNumber, txtEmergencyPhonePt1, txtEmergencyPhonePt2, txtEmergencyPhonePt3);
+            SetTriplet(data.EmergencyPhoneNumber, txtEmergencyPhonePt1, txtEmergencyPhonePt2, txtEmergencyPhonePt3);
 
             this.selectDonateExtra.SelectDropdownItem((int)data.DonateExtra);
 
@@ -185,7 +185,7 @@ namespace Project99_AcceptanceTests.POMs
         /// <param name="c1">The first control.</param>
         /// <param name="c2">The second control.</param>
         /// <param name="c3">The third control.</param>
-        private void SetTriplet(string s, IWebElement c1, IWebElement c2, IWebElement c3)
+        public static void SetTriplet(string s, IWebElement c1, IWebElement c2, IWebElement c3)
         {
             char delimiter = s.Where(c => !char.IsDigit(c)).FirstOrDefault();
             string[] sections = s.Split(delimiter);
@@ -196,6 +196,13 @@ namespace Project99_AcceptanceTests.POMs
             c1.SendKeys(sections[0]);
             c2.SendKeys(sections[1]);
             c3.SendKeys(sections[2]);
+            c1.SendKeys("");
+            Thread.Sleep(200);
+        }
+
+        public void SetDOB(string dob)
+        {
+            SetTriplet(dob, txtDOBPt1, txtDOBPt2, txtDOBPt3);
         }
 
         /// <summary>
@@ -205,7 +212,7 @@ namespace Project99_AcceptanceTests.POMs
         /// <param name="c2">The second control.</param>
         /// <param name="c3">The third control.</param>
         /// <returns>Returns the strings as a single value delimited with two '-' characters. </returns>
-        private string GetTriplet(IWebElement c1, IWebElement c2, IWebElement c3)
+        public static string GetTriplet(IWebElement c1, IWebElement c2, IWebElement c3)
         {
             return string.Format("{0}-{1}-{2}",
                 c1.GetAttribute("value"),

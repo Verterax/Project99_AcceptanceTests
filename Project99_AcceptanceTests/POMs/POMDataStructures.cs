@@ -169,4 +169,12 @@ namespace Project99_AcceptanceTests.POMs
         _500
     }
 
+    public enum RaceAwardCategories
+    { 
+        _10AndUnder,
+        _17AndUnder,
+        _18AndOver,
+        FirstResponder
+    }
+
 }

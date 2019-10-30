@@ -8,6 +8,11 @@ namespace Project99_AcceptanceTests.SeleniumFramework
 {
     public static class SHelpers
     {
+        public static string GetValue(this IWebElement element)
+        {
+            return element.GetAttribute("value");
+        }
+
         public static bool IsInteractive(this IWebElement element)
         {
             return element.Displayed && element.Enabled;
