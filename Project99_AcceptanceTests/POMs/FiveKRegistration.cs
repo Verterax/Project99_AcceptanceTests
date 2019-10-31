@@ -39,7 +39,7 @@ namespace Project99_AcceptanceTests.POMs
 
             if (registrationType != RegistrationTypes.None)
             {
-                linkAddToCart.ScrollToElement(Driver);
+                //linkAddToCart.ScrollToElement(Driver);
                 linkAddToCart.Click();
 
                 return new FiveKRegistrationForm(Driver);

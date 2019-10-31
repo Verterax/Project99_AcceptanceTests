@@ -48,6 +48,20 @@ namespace Project99_AcceptanceTests.SeleniumFramework
             }
         }
 
+        public static void ResetCurrentDriver()
+        {
+            CleanUp();
+            switch (_currentDriverType)
+            {
+                case DriverType.Chrome:
+                    _chromeDriver = null;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
         public static void CleanUp()
         {
             Current.Quit();

@@ -136,6 +136,7 @@ namespace Project99Tests
         {
             IWebDriver driver = WebDrivers.Current;
             FiveKRegistrationForm form5K = new FiveKRegistrationForm(driver, RegistrationTypes.Student);
+
             RegistrationData data = new RegistrationData(true);
             data.DonateExtra = DonateExtraOptions._100;
             form5K.FillWithData(data);
@@ -143,10 +144,14 @@ namespace Project99Tests
             form5K.btnFormAddToCart.Click();
             Thread.Sleep(1500);
 
-            form5K.linkViewCart.ScrollToElement(driver);
-            form5K.linkViewCart.Click();
+            Cart cartPage = new Cart(driver);
+            cartPage.NavigateToBaseURL();
 
+            DonateExtraOptions actualOption = cartPage.GetDonateExtraOption();
 
+            Assert.AreEqual(data.DonateExtra, actualOption);
+
+            WebDrivers.ResetCurrentDriver();
         }
     }
 }
