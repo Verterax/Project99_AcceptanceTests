@@ -8,6 +8,19 @@ namespace Project99_AcceptanceTests.SeleniumFramework
 {
     public static class SHelpers
     {
+
+        /// <summary>
+        /// Pass a C# formatted string and param list to print to the browser console.
+        /// </summary>
+        /// <param name="strFormated"></param>
+        /// <param name="arguments"></param>
+        public static void ConsoleLog(this IWebDriver driver, string strFormated, params object[] arguments)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            strFormated = strFormated.Replace("{", "arguments[" ).Replace('}', ']');      
+            js.ExecuteScript(string.Format("console.log({0})", strFormated), arguments);
+        }
+
         public static string GetValue(this IWebElement element)
         {
             return element.GetAttribute("value");

@@ -5,6 +5,7 @@ using System.Linq;
 using OpenQA.Selenium;
 using System.Threading;
 using Project99_AcceptanceTests.SeleniumFramework;
+using OpenQA.Selenium.Support.UI;
 
 namespace Project99_AcceptanceTests.POMs
 {
@@ -24,7 +25,7 @@ namespace Project99_AcceptanceTests.POMs
         {
             this.NavigateToBaseURL();
             this.SelectRegistrationType(registrationType);
-            Thread.Sleep(3500); // Wait for form to render.
+            Thread.Sleep(3000); // Wait for form to render.
         }
 
         #endregion
@@ -121,11 +122,27 @@ namespace Project99_AcceptanceTests.POMs
         public IWebElement txtAge => Driver.FindElement(
             By.XPath("/html/body/div[4]/div/div[2]/div/div[1]/div/div/div[2]/form/div[1]/div[10]/input"));
 
+        //public SelectElement selectRaceAwardCategory => new SelectElement(Driver.FindElement(
+        //    By.XPath("/html/body/div[4]/div/div[2]/div/div[1]/div/div/div[2]/form/div[1]/div[11]/select")));
+
         public IWebElement selectRaceAwardCategory => Driver.FindElement(
-            By.XPath("/html/body/div[4]/div/div[2]/div/div[1]/div/div/div[2]/form/div[1]/div[11]/select"));
+        By.XPath("/html/body/div[4]/div/div[2]/div/div[1]/div/div/div[2]/form/div[1]/div[11]/select"));
 
         public IWebElement btnFormAddToCart => Driver.FindElement(
             By.XPath("/html/body/div[4]/div/div[2]/div/div[1]/div/div/div[2]/form/div[2]/input"));
+
+        // BG Elements
+
+
+
+        private IWebElement bgFooter => Driver.FindElement(
+            By.XPath("/html/body/div[3]/footer/div"));
+
+        private IWebElement bgFooter2 => Driver.FindElement(
+            By.XPath("/html/body/div[3]/div[2]/div/div"));
+
+        //private IWebElement bgNewsletter => Driver.FindElement(
+        //    By.XPath("/html/body/div[3]/footer/div"));
 
         #endregion
 
@@ -193,16 +210,29 @@ namespace Project99_AcceptanceTests.POMs
             if (sections.Length != 3)
                 throw new Exception(string.Format("The value {0} is not a valid triplet format.", s));
 
+            c1.Clear();
             c1.SendKeys(sections[0]);
+
+            c2.Clear();
             c2.SendKeys(sections[1]);
+
+            c3.Clear();
             c3.SendKeys(sections[2]);
             c1.SendKeys("");
-            Thread.Sleep(200);
+
+        }
+
+        public void HideBG()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            js.ExecuteScript("arguments[0].style.display = 'none';", this.bgFooter);
+            js.ExecuteScript("arguments[0].style.display = 'none';", this.bgFooter2);
         }
 
         public void SetDOB(string dob)
         {
             SetTriplet(dob, txtDOBPt1, txtDOBPt2, txtDOBPt3);
+            Thread.Sleep(100);
         }
 
         /// <summary>
